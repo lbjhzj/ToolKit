@@ -152,13 +152,19 @@
  */
 + (dateType)checkOutDateTypeBy:(NSString*)dateStr
 {
-    if ([dateStr containsString:@"年"]) {
+    NSRange range1 = [dateStr rangeOfString:@"年"];
+    NSRange range2 = [dateStr rangeOfString:@"-"];
+    NSRange range3 = [dateStr rangeOfString:@"/"];
+    if (range1.location != NSNotFound)
+    {
         return DateWithChinese;
     }
-    else if ([dateStr containsString:@"-"]) {
+    else if (range2.location != NSNotFound)
+    {
         return DateWithHorizontalLine;
     }
-    else if ([dateStr containsString:@"/"]) {
+    else if (range3.location != NSNotFound)
+    {
         return DateWithSlashLine;
     }
     return 666;
